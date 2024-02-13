@@ -19,6 +19,7 @@ const FileInput: React.FC<IFileInput> = ({ handleChange }) => {
             </label>
             <input
                 type='file'
+                id='image_picker'
                 name='image_picker'
                 accept='image/png, image/jpeg'
                 className='visually-hidden'
