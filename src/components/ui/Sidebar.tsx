@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import FileInput from '@/components/form/FileInput';
+import AnnotatedFigure from '@/components/ui/AnnotatedFigure';
 
 const Sidebar = () => {
     const [thumbnails, setThumbnails] = useState<React.ReactNode[]>([]);
