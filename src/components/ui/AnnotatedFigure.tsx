@@ -1,6 +1,7 @@
 'use client';
 
 import { useImageProcessor } from '@/app/contextProvider';
+import CanvasImage from '@/components/ui/CanvasImage';
 
 interface IAnnotatedFigure {
     image: File;
@@ -19,7 +20,7 @@ const AnnotatedFigure: React.FC<IAnnotatedFigure> = ({ image, isLoading = true }
 
     return (
         <figure
-            className={`mb-5 bg-black relative ${isLoading ? 'cursor-default' : 'cursor-pointer'}`}
+            className={`mb-5 relative ${isLoading ? 'cursor-default' : 'cursor-pointer'}`}
             onClick={handleClick}
         >
             <CanvasImage src={URL.createObjectURL(image)} width={100} height={100} />
