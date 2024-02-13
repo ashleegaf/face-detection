@@ -1,10 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import { useImageProcessor } from '@/app/contextProvider';
 import FileInput from '@/components/form/FileInput';
 import AnnotatedFigure from '@/components/ui/AnnotatedFigure';
 
 const Sidebar = () => {
+    const { processedImage, setProcessedImage } = useImageProcessor();
     const [thumbnails, setThumbnails] = useState<React.ReactNode[]>([]);
 
     const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -14,6 +16,7 @@ const Sidebar = () => {
 
         const image = event.target.files[0];
         setThumbnails((prev) => [<AnnotatedFigure image={image} key={image.name} />, ...prev]);
+        setProcessedImage(URL.createObjectURL(image));
     };
 
     return (
