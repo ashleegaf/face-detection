@@ -1,15 +1,20 @@
 'use client';
 
+import { useImageProcessor } from '@/app/contextProvider';
+
 interface IAnnotatedFigure {
     image: File;
     isLoading?: boolean;
 }
 
 const AnnotatedFigure: React.FC<IAnnotatedFigure> = ({ image, isLoading = true }) => {
+    const { setProcessedImage } = useImageProcessor();
+
     const handleClick = async (_event: React.MouseEvent<HTMLElement>) => {
         if (isLoading) {
             return;
         }
+        setProcessedImage(URL.createObjectURL(image));
     };
 
     return (
