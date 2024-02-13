@@ -1,5 +1,6 @@
-const Home = () => {
+import Sidebar from '@/components/ui/Sidebar';
 
+const Home = () => {
     return (
         <div className='min-h-screen flex'>
             <Sidebar />
