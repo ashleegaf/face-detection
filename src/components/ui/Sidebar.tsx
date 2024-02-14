@@ -26,7 +26,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isLoadingModel, isLoadingDetection })
 
     return (
         <div className='overflow-y-auto'>
-            <div className='flex flex-col items-center gap-y-6 bg-gray-100 overflow-y-auto pt-5 w-60 h-screen max-h-screen'>
+            <div className='flex flex-col items-center gap-y-6 bg-indigo-100 overflow-y-auto pt-5 w-60 h-screen max-h-screen'>
                 {isLoadingModel ? (
                     <Loader loading={isLoadingModel} text={'Loading AI models...'} />
                 ) : (
