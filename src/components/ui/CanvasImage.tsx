@@ -2,13 +2,13 @@
 
 import { useRef, useEffect } from 'react';
 
-interface ICanvasImage {
+interface CanvasImageProps {
     src: string;
     width: number;
     height: number;
 }
 
-const CanvasImage: React.FC<ICanvasImage> = ({ src, width, height }) => {
+const CanvasImage: React.FC<CanvasImageProps> = ({ src, width, height }) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
     useEffect(() => {

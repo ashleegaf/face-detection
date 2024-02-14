@@ -3,11 +3,11 @@
 import Image from 'next/image';
 import plusIcon from '@root/public/plus_24.svg';
 
-interface IFileInput {
+interface FileInputProps {
     handleChange: (event: React.ChangeEvent<HTMLInputElement>) => Promise<void>;
 }
 
-const FileInput: React.FC<IFileInput> = ({ handleChange }) => {
+const FileInput: React.FC<FileInputProps> = ({ handleChange }) => {
     return (
         <div className='flex bg-blue-100 hover:bg-blue-300 focus:bg-blue-300 focus-within:bg-blue-300 w-full rounded-md'>
             <label

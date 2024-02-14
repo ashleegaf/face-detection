@@ -3,12 +3,12 @@
 import Image from 'next/image';
 import { useImageProcessor } from '@/app/contextProvider';
 
-interface IAnnotatedFigure {
+interface AnnotatedFigureProps {
     image: File;
     isLoading?: boolean;
 }
 
-const AnnotatedFigure: React.FC<IAnnotatedFigure> = ({ image, isLoading = true }) => {
+const AnnotatedFigure: React.FC<AnnotatedFigureProps> = ({ image, isLoading = true }) => {
     const { setProcessedImage } = useImageProcessor();
 
     const handleClick = async (_event: React.MouseEvent<HTMLElement>) => {
