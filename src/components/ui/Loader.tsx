@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Spinner from '@root/public/spinner.gif';
+import Spinner from '@assets/spinner.gif';
 
 type LoaderProps = {
     loading: boolean;

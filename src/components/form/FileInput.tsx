@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import plusIcon from '@root/public/plus_24.svg';
+import plusIcon from '@assets/plus_24.svg';
 
 interface FileInputProps {
     handleChange: (event: React.ChangeEvent<HTMLInputElement>) => Promise<void>;
