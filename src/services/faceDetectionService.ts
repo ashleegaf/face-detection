@@ -8,6 +8,8 @@ import {
     resizeResults,
 } from 'face-api.js';
 
+const MODEL_URL = '/models';
+
 class FaceDetectionService {
     private static instance: FaceDetectionService;
 
@@ -21,8 +23,6 @@ class FaceDetectionService {
     }
 
     public async loadModels(): Promise<void> {
-        const MODEL_URL = '/models';
-
         await loadSsdMobilenetv1Model(MODEL_URL);
         await loadFaceLandmarkModel(MODEL_URL);
         await loadFaceRecognitionModel(MODEL_URL);
