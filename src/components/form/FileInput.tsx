@@ -9,7 +9,7 @@ interface FileInputProps {
 
 const FileInput: React.FC<FileInputProps> = ({ handleChange }) => {
     return (
-        <div className='flex bg-blue-100 hover:bg-blue-300 focus:bg-blue-300 focus-within:bg-blue-300 w-full rounded-md'>
+        <div className='flex bg-blue-300 hover:bg-blue-400 focus:bg-blue-400 focus-within:bg-blue-400 w-full rounded-md font-bold'>
             <label
                 htmlFor='uploadedImage'
                 className='flex justify-center items-center gap-3 text-md cursor-pointer p-3 w-full'
