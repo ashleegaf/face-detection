@@ -9,23 +9,23 @@ interface IFileInput {
 
 const FileInput: React.FC<IFileInput> = ({ handleChange }) => {
     return (
-        <form className='flex bg-blue-100 hover:bg-blue-300 focus:bg-blue-300 focus-within:bg-blue-300 w-full rounded-md'>
+        <div className='flex bg-blue-100 hover:bg-blue-300 focus:bg-blue-300 focus-within:bg-blue-300 w-full rounded-md'>
             <label
-                htmlFor='image_picker'
+                htmlFor='uploadedImage'
                 className='flex justify-center items-center gap-3 text-md cursor-pointer p-3 w-full'
             >
                 <Image src={plusIcon} alt='Add icon' width={20} height={20} priority />
-                Choose an Image
+                Upload Image
             </label>
             <input
                 type='file'
-                id='image_picker'
-                name='image_picker'
+                id='uploadedImage'
+                name='uploadedImage'
                 accept='image/png, image/jpeg'
                 className='visually-hidden'
                 onChange={handleChange}
             />
-        </form>
+        </div>
     );
 };
 
