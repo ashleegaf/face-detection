@@ -31,7 +31,7 @@ class FaceDetectionService {
     public async detectFaces(
         imageRef: React.MutableRefObject<HTMLImageElement | null>,
         canvasRef: React.MutableRefObject<HTMLCanvasElement | null>,
-    ): Promise<void> {
+    ): Promise<number | void> {
         if (!imageRef.current || !canvasRef.current) {
             return;
         }
@@ -46,6 +46,7 @@ class FaceDetectionService {
                 height,
             });
             draw.drawDetections(canvasRef.current, resizedFaceDescriptions);
+            return resizedFaceDescriptions.length;
         } catch (error) {
             console.error(`Error detecting faces:`, error);
         }
