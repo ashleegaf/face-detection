@@ -8,11 +8,11 @@ import Loader from '@/components/ui/Loader';
 
 interface SidebarProps {
     isLoadingModel: boolean;
+    isLoadingDetection: boolean;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isLoadingModel }) => {
-    const { processedImage, setProcessedImage } = useImageProcessor();
-    const [thumbnails, setThumbnails] = useState<React.ReactNode[]>([]);
+const Sidebar: React.FC<SidebarProps> = ({ isLoadingModel, isLoadingDetection }) => {
+    const { setProcessedImage, thumbnails, setThumbnails } = useImageProcessor();
 
     const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         if (!event.target.files) {
@@ -20,7 +20,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isLoadingModel }) => {
         }
 
         const image = event.target.files[0];
-        setThumbnails((prev) => [<AnnotatedFigure image={image} key={image.name} />, ...prev]);
+        setThumbnails((prev) => [{ image, numberOfFaces: null }, ...prev]);
         setProcessedImage(URL.createObjectURL(image));
     };
 
@@ -32,7 +32,16 @@ const Sidebar: React.FC<SidebarProps> = ({ isLoadingModel }) => {
                 ) : (
                     <>
                         <FileInput handleChange={handleChange} />
-                        <div>{thumbnails}</div>
+                        <div>
+                            {thumbnails.map((thumbnail) => (
+                                <AnnotatedFigure
+                                    key={thumbnail.image.name}
+                                    image={thumbnail.image}
+                                    isLoading={isLoadingDetection}
+                                    numberOfFaces={thumbnail.numberOfFaces}
+                                />
+                            ))}
+                        </div>
                     </>
                 )}
             </div>
