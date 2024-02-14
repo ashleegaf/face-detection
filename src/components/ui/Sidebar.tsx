@@ -31,7 +31,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isLoadingModel, isLoadingDetection })
                     <Loader loading={isLoadingModel} text={'Loading AI models...'} />
                 ) : (
                     <>
-                        <FileInput handleChange={handleChange} />
+                        <FileInput handleChange={handleChange} isDisabled={isLoadingDetection} />
                         <div>
                             {thumbnails.map((thumbnail) => (
                                 <AnnotatedFigure
