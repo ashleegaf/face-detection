@@ -1,7 +1,7 @@
 'use client';
 
+import Image from 'next/image';
 import { useImageProcessor } from '@/app/contextProvider';
-import CanvasImage from '@/components/ui/CanvasImage';
 
 interface IAnnotatedFigure {
     image: File;
@@ -20,10 +20,15 @@ const AnnotatedFigure: React.FC<IAnnotatedFigure> = ({ image, isLoading = true }
 
     return (
         <figure
-            className={`mb-5 relative ${isLoading ? 'cursor-default' : 'cursor-pointer'}`}
+            className={`mb-5 relative h-24 w-24 ${isLoading ? 'cursor-default' : 'cursor-pointer'}`}
             onClick={handleClick}
         >
-            <CanvasImage src={URL.createObjectURL(image)} width={100} height={100} />
+            <Image
+                src={URL.createObjectURL(image)}
+                alt='Original image'
+                fill
+                className='absolute max-h-full'
+            />
             <figcaption className='absolute top-4 left-1/2 transform -translate-x-1/2 bg-white p-1'>
                 {isLoading ? 'Processing...' : '1 face'}
             </figcaption>
