@@ -4,8 +4,13 @@ import { useState } from 'react';
 import { useImageProcessor } from '@/app/contextProvider';
 import FileInput from '@/components/form/FileInput';
 import AnnotatedFigure from '@/components/ui/AnnotatedFigure';
+import Loader from '@/components/ui/Loader';
 
-const Sidebar = () => {
+interface SidebarProps {
+    isLoadingModel: boolean;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ isLoadingModel }) => {
     const { processedImage, setProcessedImage } = useImageProcessor();
     const [thumbnails, setThumbnails] = useState<React.ReactNode[]>([]);
 
@@ -22,8 +27,14 @@ const Sidebar = () => {
     return (
         <div className='overflow-y-auto'>
             <div className='flex flex-col items-center gap-y-6 bg-gray-100 overflow-y-auto pt-5 w-60 h-screen max-h-screen'>
-                <FileInput handleChange={handleChange} />
-                <div>{thumbnails}</div>
+                {isLoadingModel ? (
+                    <Loader loading={isLoadingModel} text={'Loading AI models...'} />
+                ) : (
+                    <>
+                        <FileInput handleChange={handleChange} />
+                        <div>{thumbnails}</div>
+                    </>
+                )}
             </div>
         </div>
     );

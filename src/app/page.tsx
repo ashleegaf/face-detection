@@ -10,14 +10,13 @@ const THUMBNAIL_SIZE = 384; // Corresponds to tailwind CSS container size
 
 const Home = () => {
     const { processedImage } = useImageProcessor();
-    const [isLoadingModel, setIsLoadingModel] = useState<boolean>(false);
+    const [isLoadingModel, setIsLoadingModel] = useState<boolean>(true);
     const [isLoadingDetection, setIsLoadingDetection] = useState<boolean>(false);
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const imageRef = useRef<HTMLImageElement | null>(null);
 
     useEffect(() => {
         (async function () {
-            setIsLoadingModel(true);
             await faceDetectionService.loadModels();
             setIsLoadingModel(false);
         })();
@@ -35,7 +34,7 @@ const Home = () => {
 
     return (
         <div className='min-h-screen flex'>
-            <Sidebar />
+            <Sidebar isLoadingModel={isLoadingModel} />
             <main className='flex flex-col flex-1 items-center p-10 bg-emerald-200 overflow-y-hidden'>
                 <header>
                     <h1>AI Face Detection Processor</h1>
@@ -57,7 +56,6 @@ const Home = () => {
                         />
                     </div>
                 )}
-                {isLoadingModel && <p>Loading Model...</p>}
             </main>
         </div>
     );
