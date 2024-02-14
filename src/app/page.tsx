@@ -1,15 +1,16 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
 import { useImageProcessor } from '@/app/contextProvider';
+import Loader from '@/components/ui/Loader';
 import Sidebar from '@/components/ui/Sidebar';
 import { faceDetectionService } from '@/services/faceDetectionService';
 
 const THUMBNAIL_SIZE = 384; // Corresponds to tailwind CSS container size
 
 const Home = () => {
-    const { processedImage } = useImageProcessor();
+    const { processedImage, setThumbnails } = useImageProcessor();
     const [isLoadingModel, setIsLoadingModel] = useState<boolean>(true);
     const [isLoadingDetection, setIsLoadingDetection] = useState<boolean>(false);
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -26,18 +27,25 @@ const Home = () => {
         if (processedImage) {
             (async function () {
                 setIsLoadingDetection(true);
-                await faceDetectionService.detectFaces(imageRef, canvasRef);
+                const numberOfFaces = await faceDetectionService.detectFaces(imageRef, canvasRef);
+                if (typeof numberOfFaces === 'number') {
+                    setThumbnails((prev) => {
+                        const newThumbnails = [...prev];
+                        newThumbnails[0].numberOfFaces = numberOfFaces;
+                        return newThumbnails;
+                    });
+                }
                 setIsLoadingDetection(false);
             })();
         }
-    }, [processedImage]);
+    }, [processedImage, setThumbnails]);
 
     return (
         <div className='min-h-screen flex'>
-            <Sidebar isLoadingModel={isLoadingModel} />
-            <main className='flex flex-col flex-1 items-center p-10 bg-emerald-200 overflow-y-hidden'>
+            <Sidebar isLoadingModel={isLoadingModel} isLoadingDetection={isLoadingDetection} />
+            <main className='flex flex-col flex-1 items-center gap-5 p-10 bg-slate-50 overflow-y-hidden'>
                 <header>
-                    <h1>AI Face Detection Processor</h1>
+                    <h1 className='font-bold text-lg'>AI Face Detection Processor</h1>
                 </header>
                 {processedImage && (
                     <div className='relative h-96 w-96 flex justify-center items-center'>
@@ -55,6 +63,9 @@ const Home = () => {
                             className='absolute max-h-full'
                         />
                     </div>
+                )}
+                {isLoadingDetection && (
+                    <Loader loading={isLoadingDetection} text={'Detecting faces...'} />
                 )}
             </main>
         </div>
