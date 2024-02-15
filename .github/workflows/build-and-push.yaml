@@ -28,4 +28,4 @@ jobs:
                   provenance: mode=max
                   sbom: true
                   push: ${{ github.event.name != 'pull-request' }}
-                  tags: face-detection:$(date +%s)
+                  tags: face-detection:${{ github.sha }}
