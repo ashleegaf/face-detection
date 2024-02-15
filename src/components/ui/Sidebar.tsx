@@ -21,7 +21,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isLoadingModel, isLoadingDetection })
 
         const image = event.target.files[0];
         setThumbnails((prev) => [{ image, numberOfFaces: null }, ...prev]);
-        setProcessedImage(URL.createObjectURL(image));
+        setProcessedImage({ src: URL.createObjectURL(image), name: image.name });
     };
 
     return (

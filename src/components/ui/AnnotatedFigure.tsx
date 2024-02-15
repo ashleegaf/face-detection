@@ -16,7 +16,7 @@ const AnnotatedFigure: React.FC<AnnotatedFigureProps> = ({ image, isLoading, num
         if (isLoading) {
             return;
         }
-        setProcessedImage(URL.createObjectURL(image));
+        setProcessedImage({ src: URL.createObjectURL(image), name: image.name });
     };
 
     return (

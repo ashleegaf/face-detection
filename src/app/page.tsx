@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { useImageProcessor } from '@/app/contextProvider';
-import Loader from '@/components/ui/Loader';
 import Sidebar from '@/components/ui/Sidebar';
 import { faceDetectionService } from '@/services/faceDetectionService';
 
@@ -24,10 +23,14 @@ const Home = () => {
     }, []);
 
     useEffect(() => {
-        if (processedImage) {
+        if (processedImage.src) {
             (async function () {
                 setIsLoadingDetection(true);
-                const numberOfFaces = await faceDetectionService.detectFaces(imageRef, canvasRef);
+                const numberOfFaces = await faceDetectionService.detectFaces(
+                    processedImage.name,
+                    imageRef,
+                    canvasRef,
+                );
                 if (typeof numberOfFaces === 'number') {
                     setThumbnails((prev) => {
                         const newThumbnails = [...prev];
@@ -47,11 +50,11 @@ const Home = () => {
                 <header>
                     <h1 className='font-bold text-lg'>AI Face Detection Processor</h1>
                 </header>
-                {processedImage && (
+                {processedImage.src && (
                     <div className='relative h-96 w-96 flex justify-center items-center'>
                         <Image
                             ref={imageRef}
-                            src={processedImage}
+                            src={processedImage.src}
                             alt='Original image'
                             fill
                             className='absolute max-h-full'
@@ -63,9 +66,6 @@ const Home = () => {
                             className='absolute max-h-full'
                         />
                     </div>
-                )}
-                {isLoadingDetection && (
-                    <Loader loading={isLoadingDetection} text={'Detecting faces...'} />
                 )}
             </main>
         </div>
