@@ -10,14 +10,14 @@ import {
 
 const MODEL_URL = '/models';
 
-interface DetectionResults {
+interface DetectionResult {
     numberOfFaces: number;
     resizedFaceDescriptions: draw.TDrawDetectionsInput | draw.TDrawDetectionsInput[];
 }
 
 class FaceDetectionService {
     private static instance: FaceDetectionService;
-    private detectionResults: Map<string, DetectionResults> = new Map();
+    private detectionResultsCache: Map<string, DetectionResult> = new Map();
 
     private constructor() {}
 
@@ -44,7 +44,7 @@ class FaceDetectionService {
         }
 
         try {
-            const existingDetection = this.detectionResults.get(name);
+            const existingDetection = this.detectionResultsCache.get(name);
             if (existingDetection) {
                 const { resizedFaceDescriptions } = existingDetection;
                 draw.drawDetections(canvasRef.current, resizedFaceDescriptions);
@@ -60,11 +60,11 @@ class FaceDetectionService {
                 height,
             });
 
-            const newDetectionResults: DetectionResults = {
+            const newDetectionResults: DetectionResult = {
                 numberOfFaces: resizedFaceDescriptions.length,
                 resizedFaceDescriptions,
             };
-            this.detectionResults.set(name, newDetectionResults);
+            this.detectionResultsCache.set(name, newDetectionResults);
 
             draw.drawDetections(canvasRef.current, resizedFaceDescriptions);
 
