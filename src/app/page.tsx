@@ -26,6 +26,10 @@ const Home = () => {
         if (processedImage.src) {
             (async function () {
                 setIsLoadingDetection(true);
+
+                const canvas = canvasRef.current?.getContext('2d');
+                canvas?.reset();
+
                 const numberOfFaces = await faceDetectionService.detectFaces(
                     processedImage.name,
                     imageRef,
@@ -38,6 +42,7 @@ const Home = () => {
                         return newThumbnails;
                     });
                 }
+                
                 setIsLoadingDetection(false);
             })();
         }
