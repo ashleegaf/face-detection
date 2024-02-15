@@ -75,7 +75,7 @@ class FaceDetectionService {
 
             return resizedFaceDescriptions.length;
         } catch (error) {
-            console.error(`Error detecting faces:`, error);
+            console.error(`Error detecting faces for ${name}:`, error);
         }
     }
 }
