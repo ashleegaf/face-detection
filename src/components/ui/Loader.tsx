@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Spinner from '@assets/spinner.gif';
+import spinner from '@assets/spinner.gif';
 
 type LoaderProps = {
     loading: boolean;
@@ -11,7 +11,7 @@ const Loader: React.FC<LoaderProps> = ({ loading, text }) => {
         loading && (
             <div className='flex flex-col items-center justify-center gap-4'>
                 {text}
-                <Image src={Spinner} alt='Loader' width={50} height={50} priority />
+                <Image src={spinner} alt='Spinner' width={50} height={50} priority />
             </div>
         )
     );

@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import plusIcon from '@assets/plus_24.svg';
-import Spinner from '@assets/spinner.gif';
+import spinner from '@assets/spinner.gif';
 
 interface FileInputProps {
     handleChange: (event: React.ChangeEvent<HTMLInputElement>) => Promise<void>;
@@ -19,7 +19,7 @@ const FileInput: React.FC<FileInputProps> = ({ handleChange, isDisabled }) => {
                 className={`flex justify-center items-center gap-3 text-md p-3 w-full ${!isDisabled && 'cursor-pointer'}`}
             >
                 {isDisabled ? (
-                    <Image src={Spinner} alt='Loader' width={20} height={20} priority />
+                    <Image src={spinner} alt='Loader' width={20} height={20} priority />
                 ) : (
                     <>
                         <Image src={plusIcon} alt='Add icon' width={20} height={20} priority />
