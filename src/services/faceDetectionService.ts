@@ -10,8 +10,14 @@ import {
 
 const MODEL_URL = '/models';
 
+interface DetectionResults {
+    numberOfFaces: number;
+    resizedFaceDescriptions: draw.TDrawDetectionsInput | draw.TDrawDetectionsInput[];
+}
+
 class FaceDetectionService {
     private static instance: FaceDetectionService;
+    private detectionResults: Map<string, DetectionResults> = new Map();
 
     private constructor() {}
 
@@ -29,14 +35,22 @@ class FaceDetectionService {
     }
 
     public async detectFaces(
+        name: string,
         imageRef: React.MutableRefObject<HTMLImageElement | null>,
         canvasRef: React.MutableRefObject<HTMLCanvasElement | null>,
     ): Promise<number | void> {
-        if (!imageRef.current || !canvasRef.current) {
+        if (!name || !imageRef.current || !canvasRef.current) {
             return;
         }
 
         try {
+            const existingDetection = this.detectionResults.get(name);
+            if (existingDetection) {
+                const { resizedFaceDescriptions } = existingDetection;
+                draw.drawDetections(canvasRef.current, resizedFaceDescriptions);
+                return;
+            }
+
             const fullFaceDescriptions = await detectAllFaces(imageRef.current)
                 .withFaceLandmarks()
                 .withFaceDescriptors();
@@ -45,7 +59,15 @@ class FaceDetectionService {
                 width,
                 height,
             });
+
+            const newDetectionResults: DetectionResults = {
+                numberOfFaces: resizedFaceDescriptions.length,
+                resizedFaceDescriptions,
+            };
+            this.detectionResults.set(name, newDetectionResults);
+
             draw.drawDetections(canvasRef.current, resizedFaceDescriptions);
+
             return resizedFaceDescriptions.length;
         } catch (error) {
             console.error(`Error detecting faces:`, error);
