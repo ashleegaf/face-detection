@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useImageProcessor } from '@/app/contextProvider';
 import FileInput from '@/components/form/FileInput';
-import AnnotatedFigure from '@/components/ui/AnnotatedFigure';
+import AnnotatedThumbnail from '@/components/ui/AnnotatedThumbnail';
 import Loader from '@/components/ui/Loader';
 
 interface SidebarProps {
@@ -34,7 +34,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isLoadingModel, isLoadingDetection })
                         <FileInput handleChange={handleChange} isDisabled={isLoadingDetection} />
                         <div>
                             {thumbnails.map((thumbnail) => (
-                                <AnnotatedFigure
+                                <AnnotatedThumbnail
                                     key={thumbnail.image.name}
                                     image={thumbnail.image}
                                     isLoading={isLoadingDetection}
