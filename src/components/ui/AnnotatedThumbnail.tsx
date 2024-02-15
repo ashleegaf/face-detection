@@ -3,13 +3,17 @@
 import Image from 'next/image';
 import { useImageProcessor } from '@/app/contextProvider';
 
-interface AnnotatedFigureProps {
+interface AnnotatedThumbnailProps {
     image: File;
     isLoading: boolean;
     numberOfFaces: number | null;
 }
 
-const AnnotatedFigure: React.FC<AnnotatedFigureProps> = ({ image, isLoading, numberOfFaces }) => {
+const AnnotatedThumbnail: React.FC<AnnotatedThumbnailProps> = ({
+    image,
+    isLoading,
+    numberOfFaces,
+}) => {
     const { setProcessedImage } = useImageProcessor();
 
     const handleClick = async (_event: React.MouseEvent<HTMLElement>) => {
@@ -37,4 +41,4 @@ const AnnotatedFigure: React.FC<AnnotatedFigureProps> = ({ image, isLoading, num
     );
 };
 
-export default AnnotatedFigure;
+export default AnnotatedThumbnail;
