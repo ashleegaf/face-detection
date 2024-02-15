@@ -3,31 +3,30 @@
 import { createContext, useContext, useState } from 'react';
 import { ReadOnlyPropsType } from '@/app/layout';
 
+type ProcessedImageType = { src: string; name: string };
+type ThumbnailType = { image: File; numberOfFaces: number | null };
+
 interface ImageProcessorContextProps {
-    processedImage: { src: string, name: string };
+    processedImage: ProcessedImageType;
     setProcessedImage: React.Dispatch<ImageProcessorContextProps['processedImage']>;
-    thumbnails: { image: File; numberOfFaces: number | null }[];
+    thumbnails: ThumbnailType[];
     setThumbnails: React.Dispatch<React.SetStateAction<ImageProcessorContextProps['thumbnails']>>;
 }
 
 export const ImageProcessorContext = createContext<ImageProcessorContextProps>({
     processedImage: { src: '', name: '' },
-    setProcessedImage: (value: { src: string, name: string }) => void {},
+    setProcessedImage: (value: { src: string; name: string }) => void {},
     thumbnails: [],
-    setThumbnails: (
-        value:
-            | ((
-                  prevState: { image: File; numberOfFaces: number | null }[],
-              ) => { image: File; numberOfFaces: number | null }[])
-            | { image: File; numberOfFaces: number | null }[],
-    ) => void {},
+    setThumbnails: (value: ((prevState: ThumbnailType[]) => ThumbnailType[]) | ThumbnailType[]) =>
+        void {},
 });
 
 export const ImageProcessorProvider: React.FC<ReadOnlyPropsType> = ({ children }) => {
-    const [processedImage, setProcessedImage] = useState<{ src: string, name: string }>({ src: '', name: '' });
-    const [thumbnails, setThumbnails] = useState<{ image: File; numberOfFaces: number | null }[]>(
-        [],
-    );
+    const [processedImage, setProcessedImage] = useState<ProcessedImageType>({
+        src: '',
+        name: '',
+    });
+    const [thumbnails, setThumbnails] = useState<ThumbnailType[]>([]);
 
     return (
         <ImageProcessorContext.Provider
