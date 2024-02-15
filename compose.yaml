@@ -1,0 +1,14 @@
+# Build against the development stage for local development.
+services:
+    server:
+        build:
+            args:
+                - NODE_ENV=development
+            context: .
+            target: development
+        volumes:
+            - .:/usr/src/app
+        environment:
+            NODE_ENV: development
+        ports:
+            - 3000:3000
