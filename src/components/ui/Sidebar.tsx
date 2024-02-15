@@ -16,18 +16,17 @@ const Sidebar: React.FC<SidebarProps> = ({ isLoadingModel, isLoadingDetection })
     const [isDuplicate, setIsDuplicate] = useState<boolean>(false);
 
     const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (!event.target.files) {
+        if (!event.target.files || !event.target.files.length) {
             return;
         }
 
         const image = event.target.files[0];
-
         const existingImage = thumbnails.some((thumbnail) => thumbnail.image.name === image.name);
         if (existingImage) {
             setIsDuplicate(true);
             return;
         }
-
+        
         setIsDuplicate(false);
         setThumbnails((prev) => [{ image, numberOfFaces: null }, ...prev]);
         setProcessedImage({ src: URL.createObjectURL(image), name: image.name });
