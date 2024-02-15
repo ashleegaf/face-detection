@@ -28,10 +28,15 @@ class FaceDetectionService {
         return FaceDetectionService.instance;
     }
 
-    public async loadModels(): Promise<void> {
-        await loadSsdMobilenetv1Model(MODEL_URL);
-        await loadFaceLandmarkModel(MODEL_URL);
-        await loadFaceRecognitionModel(MODEL_URL);
+    public async loadModels(): Promise<void | Error> {
+        try {
+            await loadSsdMobilenetv1Model(MODEL_URL);
+            await loadFaceLandmarkModel(MODEL_URL);
+            await loadFaceRecognitionModel(MODEL_URL);
+        } catch (error: any) {
+            console.error(`Error loading models. Validate model url.`, error);
+            return error;
+        }
     }
 
     public async detectFaces(

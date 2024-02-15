@@ -10,14 +10,20 @@ const THUMBNAIL_SIZE = 384; // Corresponds to tailwind CSS container size
 
 const Home = () => {
     const { processedImage, setThumbnails } = useImageProcessor();
+
     const [isLoadingModel, setIsLoadingModel] = useState<boolean>(true);
     const [isLoadingDetection, setIsLoadingDetection] = useState<boolean>(false);
+    const [isErrorModel, setIsErrorModel] = useState<boolean>(false);
+
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const imageRef = useRef<HTMLImageElement | null>(null);
 
     useEffect(() => {
         (async function () {
-            await faceDetectionService.loadModels();
+            const result = await faceDetectionService.loadModels();
+            if (result instanceof Error) {
+                setIsErrorModel(true);
+            }
             setIsLoadingModel(false);
         })();
     }, []);
@@ -51,6 +57,7 @@ const Home = () => {
             <Sidebar
                 isLoadingModel={isLoadingModel}
                 isLoadingDetection={isLoadingDetection}
+                isErrorModel={isErrorModel}
                 setIsLoadingDetection={setIsLoadingDetection}
             />
             <main className='flex flex-1 flex-col items-center gap-5 overflow-y-hidden bg-slate-50 p-10'>
