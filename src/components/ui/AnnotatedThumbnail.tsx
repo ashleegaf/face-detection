@@ -25,7 +25,7 @@ const AnnotatedThumbnail: React.FC<AnnotatedThumbnailProps> = ({
 
     return (
         <figure
-            className={`mb-5 relative h-24 w-24 ${isLoading ? 'cursor-default' : 'cursor-pointer'}`}
+            className={`relative mb-5 h-24 w-24 ${isLoading ? 'cursor-default' : 'cursor-pointer'}`}
             onClick={handleClick}
         >
             <Image
@@ -34,7 +34,7 @@ const AnnotatedThumbnail: React.FC<AnnotatedThumbnailProps> = ({
                 fill
                 className='absolute max-h-full'
             />
-            <figcaption className='absolute top-4 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-white p-1'>
+            <figcaption className='absolute left-1/2 top-4 -translate-x-1/2 transform whitespace-nowrap bg-white p-1'>
                 {typeof numberOfFaces === 'number' ? `${numberOfFaces}+ face(s)` : 'Processing...'}
             </figcaption>
         </figure>

@@ -35,7 +35,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isLoadingModel, isLoadingDetection })
 
     return (
         <div className='overflow-y-auto'>
-            <div className='flex flex-col items-center gap-y-6 bg-indigo-100 overflow-y-auto pt-5 w-60 h-screen max-h-screen'>
+            <div className='flex h-screen max-h-screen w-60 flex-col items-center gap-y-6 overflow-y-auto bg-indigo-100 pt-5'>
                 {isLoadingModel ? (
                     <Loader loading={isLoadingModel} text={'Loading AI models...'} />
                 ) : (
@@ -46,7 +46,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isLoadingModel, isLoadingDetection })
                                 isDisabled={isLoadingDetection}
                             />
                             {isDuplicate && (
-                                <p className='text-xs text-red-500 font-bold mt-1'>
+                                <p className='mt-1 text-xs font-bold text-red-500'>
                                     Duplicate image. Try again.
                                 </p>
                             )}

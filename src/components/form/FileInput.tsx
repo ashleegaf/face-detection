@@ -12,11 +12,11 @@ interface FileInputProps {
 const FileInput: React.FC<FileInputProps> = ({ handleChange, isDisabled }) => {
     return (
         <div
-            className={`flex bg-blue-300 w-full min-h-12 rounded-md font-bold ${!isDisabled && 'hover:bg-blue-400 focus:bg-blue-400 focus-within:bg-blue-400'}`}
+            className={`flex min-h-12 w-full rounded-md bg-blue-300 font-bold ${!isDisabled && 'focus-within:bg-blue-400 hover:bg-blue-400 focus:bg-blue-400'}`}
         >
             <label
                 htmlFor='uploadedImage'
-                className={`flex justify-center items-center gap-3 text-md p-3 w-full ${!isDisabled && 'cursor-pointer'}`}
+                className={`text-md flex w-full items-center justify-center gap-3 p-3 ${!isDisabled && 'cursor-pointer'}`}
             >
                 {isDisabled ? (
                     <Image src={spinner} alt='Loader' width={20} height={20} priority />

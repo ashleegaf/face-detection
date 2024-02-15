@@ -42,21 +42,21 @@ const Home = () => {
                         return newThumbnails;
                     });
                 }
-                
+
                 setIsLoadingDetection(false);
             })();
         }
     }, [processedImage, setThumbnails]);
 
     return (
-        <div className='min-h-screen flex'>
+        <div className='flex min-h-screen'>
             <Sidebar isLoadingModel={isLoadingModel} isLoadingDetection={isLoadingDetection} />
-            <main className='flex flex-col flex-1 items-center gap-5 p-10 bg-slate-50 overflow-y-hidden'>
+            <main className='flex flex-1 flex-col items-center gap-5 overflow-y-hidden bg-slate-50 p-10'>
                 <header>
-                    <h1 className='font-bold text-lg'>AI Face Detection Processor</h1>
+                    <h1 className='text-lg font-bold'>AI Face Detection Processor</h1>
                 </header>
                 {processedImage.src && (
-                    <div className='relative h-96 w-96 flex justify-center items-center'>
+                    <div className='relative flex h-96 w-96 items-center justify-center'>
                         <Image
                             ref={imageRef}
                             src={processedImage.src}
