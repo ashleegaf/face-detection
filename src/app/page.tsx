@@ -25,8 +25,6 @@ const Home = () => {
     useEffect(() => {
         if (processedImage.src) {
             (async function () {
-                setIsLoadingDetection(true);
-
                 const canvas = canvasRef.current?.getContext('2d');
                 canvas?.reset();
 
@@ -50,7 +48,11 @@ const Home = () => {
 
     return (
         <div className='flex min-h-screen'>
-            <Sidebar isLoadingModel={isLoadingModel} isLoadingDetection={isLoadingDetection} />
+            <Sidebar
+                isLoadingModel={isLoadingModel}
+                isLoadingDetection={isLoadingDetection}
+                setIsLoadingDetection={setIsLoadingDetection}
+            />
             <main className='flex flex-1 flex-col items-center gap-5 overflow-y-hidden bg-slate-50 p-10'>
                 <header>
                     <h1 className='text-lg font-bold'>AI Face Detection Processor</h1>

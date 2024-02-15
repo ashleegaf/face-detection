@@ -9,9 +9,14 @@ import Loader from '@/components/ui/Loader';
 interface SidebarProps {
     isLoadingModel: boolean;
     isLoadingDetection: boolean;
+    setIsLoadingDetection: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isLoadingModel, isLoadingDetection }) => {
+const Sidebar: React.FC<SidebarProps> = ({
+    isLoadingModel,
+    isLoadingDetection,
+    setIsLoadingDetection,
+}) => {
     const { setProcessedImage, thumbnails, setThumbnails } = useImageProcessor();
     const [isDuplicate, setIsDuplicate] = useState<boolean>(false);
 
@@ -26,7 +31,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isLoadingModel, isLoadingDetection })
             setIsDuplicate(true);
             return;
         }
-        
+
+        setIsLoadingDetection(true);
         setIsDuplicate(false);
         setThumbnails((prev) => [{ image, numberOfFaces: null }, ...prev]);
         setProcessedImage({ src: URL.createObjectURL(image), name: image.name });
