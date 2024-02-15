@@ -13,6 +13,7 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ isLoadingModel, isLoadingDetection }) => {
     const { setProcessedImage, thumbnails, setThumbnails } = useImageProcessor();
+    const [isDuplicate, setIsDuplicate] = useState<boolean>(false);
 
     const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         if (!event.target.files) {
@@ -20,6 +21,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isLoadingModel, isLoadingDetection })
         }
 
         const image = event.target.files[0];
+
+        const existingImage = thumbnails.some((thumbnail) => thumbnail.image.name === image.name);
+        if (existingImage) {
+            setIsDuplicate(true);
+            return;
+        }
+
+        setIsDuplicate(false);
         setThumbnails((prev) => [{ image, numberOfFaces: null }, ...prev]);
         setProcessedImage({ src: URL.createObjectURL(image), name: image.name });
     };
@@ -31,7 +40,17 @@ const Sidebar: React.FC<SidebarProps> = ({ isLoadingModel, isLoadingDetection })
                     <Loader loading={isLoadingModel} text={'Loading AI models...'} />
                 ) : (
                     <>
-                        <FileInput handleChange={handleChange} isDisabled={isLoadingDetection} />
+                        <div className='min-h-16 w-full text-center'>
+                            <FileInput
+                                handleChange={handleChange}
+                                isDisabled={isLoadingDetection}
+                            />
+                            {isDuplicate && (
+                                <p className='text-xs text-red-500 font-bold mt-1'>
+                                    Duplicate image. Try again.
+                                </p>
+                            )}
+                        </div>
                         <div>
                             {thumbnails.map((thumbnail) => (
                                 <AnnotatedThumbnail
