@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<p align="center">An AI Face Detection <a href="https://ecommerce-sales-dashboard.vercel.app/"></a>web application.</p>
+
+<p align="center">
+    <a href="https://www.typescriptlang.org/">
+        <img src="https://skillicons.dev/icons?i=ts" />
+    </a>
+    <a href="https://react.dev/">
+        <img src="https://skillicons.dev/icons?i=react" />
+    </a>
+    <a href="https://nextjs.org/">
+        <img src="https://skillicons.dev/icons?i=nextjs" />
+    </a>
+    <a href="https://nextjs.org/">
+        <img src="https://skillicons.dev/icons?i=tailwind" />
+    </a>
+    <a href="https://nextjs.org/">
+        <img src="https://skillicons.dev/icons?i=docker" />
+    </a>
+    <a href="https://nextjs.org/">
+        <img src="https://skillicons.dev/icons?i=githubactions" />
+    </a>
+</p>
+
+## Features
+
+-   Process an uploaded image with AI face detection via [face-api.js](https://github.com/justadudewhohacks/face-api.js)
+-   View loading indicators while images are processed by the face detection service
+-   Browse a list of uploaded thumbnails, each annotated with the number of detected faces
+-   View a standard, full-sized image with bounding boxes around detected faces
+-   Cache face detection results for quick re-display of previously-uploaded images
+-   Re-display previously-uploaded images via clicking on a new thumbnail
+-   Prevent the upload and AI processing of duplicate images and display a warning message
 
 ## Getting Started
 
-First, run the development server:
+Before running the container, ensure [Docker Desktop and Docker Compose](https://docs.docker.com/compose/install/) are installed on your computer. Then open Docker Desktop to run the Docker engine.
+
+**Clone the repo:**
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+docker compose up -d
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Build the image and start the application's container:**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+docker compose up --build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the app. Build locally within your IDE. Manage the image and container from Docker Desktop.
 
-## Learn More
+## Roadmap
 
-To learn more about Next.js, take a look at the following resources:
+-   [ ] Replace AI face detection service provider
+-   [ ] Testing
+-   [ ] Deploy
 
--   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
--   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Acknowledgements
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+-   [Skill Icons](https://skillicons.dev)
+-   This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
