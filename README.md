@@ -49,6 +49,9 @@ docker compose up --build
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the app. Build locally within your IDE. Manage the image and container from Docker Desktop.
 
+## App Preview
+https://github.com/ashleegaf/face-detection/assets/114522387/f24f6590-94bd-46db-9ef4-075d1ae8a32f
+
 ## Roadmap
 
 -   [ ] Replace AI face detection service provider
