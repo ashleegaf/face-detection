@@ -38,18 +38,27 @@ Before running the container, ensure [Docker Desktop and Docker Compose](https:/
 **Clone the repo:**
 
 ```bash
-docker compose up -d
+git clone [link]
 ```
 
-**Build the image and start the application's container:**
+**Build and start the application's container:**
 
 ```bash
-docker compose up --build
+docker compose up
+# the --build option builds the image before starting the container
+# the -d flag runs the container in detached mode
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the app. Build locally within your IDE. Manage the image and container from Docker Desktop.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the app. Develop application locally within your IDE. Manage the image and container with Docker Desktop.
+
+**Stop running the container:**
+
+```bash
+docker compose stop
+```
 
 ## App Preview
+
 https://github.com/ashleegaf/face-detection/assets/114522387/f24f6590-94bd-46db-9ef4-075d1ae8a32f
 
 ## Roadmap
